@@ -1,0 +1,12 @@
+---
+- name: Set Dynamic Variable
+  set_fact:
+    environment: '{{ variable_environment }}'
+  vars:
+    variable_environment:  "{% if inventory_hostname in groups['dev'] %}\
+                              dev\
+                            {% if inventory_hosntname in groups['test'] %}\
+                              test\
+                            {% if inventory_hostname in groups['production'] %}\
+                              prod\
+                            {% endif %}"
